@@ -14,16 +14,14 @@
 		http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 		
     <context:annotation-config/>
-	<bean id="springDatasource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<bean id="springDatasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="url" value="${jdbc.url}" />
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
 
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+	<!--<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="springDatasource" />
 		<property name="packagesToScan" value="org.mvc.security.entity" />
 		<property name="hibernateProperties">
@@ -34,13 +32,32 @@
 				<prop key="hibernate.connection.autocommit">${hibernate.connection.autocommit}</prop>
 			</props>
 		</property>
-	</bean>
+	</bean>-->
 
-	<tx:annotation-driven transaction-manager="transactionManager" /> 
+	<tx:annotation-driven /> 
 	
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+	<!--<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+	</bean>  -->
+	
+	
+	<!-- JPA Config -->
+    <bean id="entityManagerFactoryBean" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+      <property name="dataSource" ref="springDatasource" />
+      <property name="packagesToScan" value="org.mvc.security" />
+      <property name="jpaVendorAdapter">
+         <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+      </property>
+      <property name="jpaProperties">
+         <props>
+            <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+            <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+         </props>
+      </property>
+     </bean>
+   
+      <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+            <property name="entityManagerFactory" ref="entityManagerFactoryBean" />
+      </bean>
 
 </beans>

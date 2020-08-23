@@ -15,123 +15,78 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-/**
- * The Class User.
- */
+
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 
-	/** The id. */
+
 	@Id
+	@Column(name = "user_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	/** The username. */
-	@Column(name = "username")
-	private String username;
 
-	/** The password. */
+	@Column(name = "user_name")
+	private String userName;
+
+
 	@Column(name = "password")
 	private String password;
 
-	/** The password confirm. */
 	@Transient
 	private String passwordConfirm;
+	
+	@Column(name = "is_active")
+	private boolean isActive;
 
-	/** The roles. */
-	@ManyToMany(cascade = CascadeType.REMOVE, fetch =FetchType.EAGER)
-	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<Role> roles;
 
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
+	/*
+	 * @ManyToMany(cascade = CascadeType.REMOVE, fetch =FetchType.EAGER)
+	 * 
+	 * @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
+	 * inverseJoinColumns = @JoinColumn(name = "role_id")) private List<Role> roles;
 	 */
+
 	public Long getId() {
 		return id;
 	}
 
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the new id
-	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	/**
-	 * Gets the username.
-	 *
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	/**
-	 * Sets the username.
-	 *
-	 * @param username the new username
-	 */
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	/**
-	 * Gets the password.
-	 *
-	 * @return the password
-	 */
 	public String getPassword() {
 		return password;
 	}
 
-	/**
-	 * Sets the password.
-	 *
-	 * @param password the new password
-	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	/**
-	 * Gets the roles.
-	 *
-	 * @return the roles
-	 */
-	public List<Role> getRoles() {
-		return roles;
-	}
 
-	/**
-	 * Sets the roles.
-	 *
-	 * @param roles the new roles
-	 */
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
-	/**
-	 * Gets the password confirm.
-	 *
-	 * @return the password confirm
-	 */
 	public String getPasswordConfirm() {
 		return passwordConfirm;
 	}
 
-	/**
-	 * Sets the password confirm.
-	 *
-	 * @param passwordConfirm the new password confirm
-	 */
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 }

@@ -9,7 +9,7 @@
 	    
     	
 	<!-- <context:annotation-config /> -->
-	<context:component-scan base-package="org.mvc" />
+	<context:component-scan base-package="org.mvc.security" />
 		
 	<import resource="spring-context.xml"></import>
 	<import resource="mvc-dispatcher-servlet.xml"></import>
