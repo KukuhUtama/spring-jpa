@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService 
 {
-	@Autowired
+	
+	@Autowired 
 	private UserRepository userRepository;
+	 
 	
 	private User user;
 	private UserDetailsImpl userDetailsImpl;
@@ -22,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService
 	public UserDetails loadUserByUsername(String userName) {
 	     user = userRepository.findByUserName(userName);
 	     userDetailsImpl = new UserDetailsImpl(user);
-	     return userDetailsImpl;
+	     return null;
 	}
 	
 }
