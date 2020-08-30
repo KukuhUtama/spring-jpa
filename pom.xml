@@ -32,6 +32,7 @@
 		<jackson.core.version>2.4.1</jackson.core.version>
 		<jackson.bind.version>2.4.1</jackson.bind.version>
 		<jsoup.version>1.11.3</jsoup.version>
+		<model.mapper.version>2.3.0</model.mapper.version>
 		<org.apache.maven.plugins.war.version>1</org.apache.maven.plugins.war.version>
 	</properties>
 
@@ -141,24 +142,34 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>2.1</version>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+		<!-- jSoup-->
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>${jsoup.version}</version>
 		</dependency>
+		
+		
+		<!--Model Mapper -->
+        <dependency>
+  			 <groupId>org.modelmapper</groupId>
+   			 <artifactId>modelmapper</artifactId>
+    		 <version>${model.mapper.version}</version>
+        </dependency>
 
 		<!-- jUnit -->
 		<dependency>

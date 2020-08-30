@@ -8,10 +8,10 @@
 	<http auto-config="true">
 	<access-denied-handler ref="customAccessDeniedHandler" />
 	<csrf disabled="true"/>
-        <intercept-url pattern="/" access="permitAll" />
+        <!-- <intercept-url pattern="/" access="permitAll" />
         <intercept-url pattern="/login*" access="isAnonymous()" />
 		<intercept-url pattern="/user/**" access="hasAuthority('USER')" />
-		<intercept-url pattern="/admin/**" access="hasAuthority('ADMIN')" />
+		<intercept-url pattern="/admin/**" access="hasAuthority('ADMIN')" />-->
 		
 		<form-login login-page="/login.html" 
 		    authentication-success-handler-ref="customSuccessHandler"
