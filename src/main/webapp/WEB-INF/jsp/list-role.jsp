@@ -19,7 +19,7 @@
           <tr>
            <td>${counter.count}</td>
            <td>${element.roleName}</td>
-           <td><a href="${root}/role/delete-role-by-id.html?roleId=${element.id}">Delete</a> </td>
+           <td><a href="${root}/role/delete-role-by-id.html?roleId=${element.id}">Delete</a> | <a href="${root}/role/update-role.html?roleId=${element.id}">Update</a> </td>
           </tr>
        </c:forEach>
      </table>

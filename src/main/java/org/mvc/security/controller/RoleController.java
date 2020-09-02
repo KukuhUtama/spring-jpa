@@ -7,6 +7,7 @@ import org.mvc.security.domain.Role;
 import org.mvc.security.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +22,7 @@ public class RoleController {
 	  
 	private ModelAndView mv;
 	private Role role;
+	private boolean isUpdate = false;
 	private List<Role> listOfRole;
 	
 	@RequestMapping(value = "/add-role.html", method = RequestMethod.GET)
@@ -38,7 +40,7 @@ public class RoleController {
 	}
 	
 	
-	@RequestMapping(value = "/role-list.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/list-role.html", method = RequestMethod.GET)
 	public ModelAndView getAllRole() {
 		mv = new ModelAndView("list-role");
 		listOfRole = roleService.getListOfRole();
@@ -56,6 +58,31 @@ public class RoleController {
 		return  "redirect:/role/role-list.html";
 	}
 	
-
-
+	@RequestMapping(value = "/update-role.html", method = RequestMethod.GET)
+	public ModelAndView updateRole(Integer roleId) {
+		mv = new ModelAndView("update-role");
+		isUpdate = true;
+		if(roleId != null) {
+	        Long id = Long.valueOf(roleId.longValue());
+			role = roleService.getRoleById(id);	
+		}
+		mv.addObject("role", role);
+		mv.addObject("isUpdate", isUpdate);
+		return mv;
+	}
+	
+	
+	
+	@RequestMapping(value = "/update-role.html", method = RequestMethod.POST)
+	public String updateRoleProcess(Role role) {
+		roleService.updateRole(role);
+		return  "redirect:/role/list-role.html";
+	}
+	
+	/*
+	 * @RequestMapping(value = "/edit-role.html", method = RequestMethod.POST)
+	 * public ModelAndView updateRole(@ModelAttribute("role") Role role) { mv = new
+	 * ModelAndView("add-role"); mv.addObject("role", role);
+	 * System.out.println("role:"+role.getRoleName()); return mv; }
+	 */
 }

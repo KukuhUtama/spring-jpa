@@ -5,26 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
-<c:if test = "${isUpdate eq true}">
 <title>Update Role</title>
-</c:if>
-<c:if test = "${isUpdate eq false}">
-<title>Add Role</title>
-</c:if>
 </head>
 <body>
     <c:set var="root" value="${pageContext.request.contextPath}"/>
     <div align="center">
-        <h2>Add New Role</h2>
-        <form:form action="${root}/role/add-role.html"  modelAttribute="role" method="post">
+        <h2>Update Role</h2>
+        <form:form action="${root}/role/update-role.html"  modelAttribute="role" method="post">
+        <input type="hidden" "id" name="id" value="${role.id}">
             <table border="0" cellpadding="1">
                 <tr>
                     <td>Role Name: </td>
                     <td><input id="roleName" name="roleName" value="${role.roleName}"></td>
                 </tr>  
                 <tr>
-                     <td colspan="2"><input type="submit" value="Update"></td>
+                    <td colspan="2"><input type="submit" value="Update"></td>
                 </tr>                    
             </table>
         </form:form>
