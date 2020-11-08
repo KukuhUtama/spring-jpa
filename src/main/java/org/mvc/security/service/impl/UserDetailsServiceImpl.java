@@ -1,7 +1,8 @@
 package org.mvc.security.service.impl;
 
-import org.mvc.security.domain.UserDetailsImpl;
-import org.mvc.security.entity.User;
+import org.modelmapper.ModelMapper;
+import org.mvc.security.domain.User;
+import org.mvc.security.entity.UserEntity;
 import org.mvc.security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,21 +11,25 @@ import org.springframework.stereotype.Service;
 
 
 @Service("userDetailsService")
-public class UserDetailsServiceImpl implements UserDetailsService 
-{
+public class UserDetailsServiceImpl implements UserDetailsService {
+	
+
+	@Autowired
+	private ModelMapper modelMapper;
 	
 	@Autowired 
 	private UserRepository userRepository;
 	 
-	
+	private UserEntity userEntityOpt;
 	private User user;
-	private UserDetailsImpl userDetailsImpl;
+	private UserDetails userDetailsImpl;
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) {
-	     user = userRepository.findByUserName(userName);
-	     userDetailsImpl = new UserDetailsImpl(user);
-	     return null;
+		userEntityOpt = userRepository.findByUserName(userName);
+		user = modelMapper.map(userEntityOpt, User.class);
+	//	UserDetailsImpl = new UserDetailsImpl(user);
+		return null;
 	}
 	
 }

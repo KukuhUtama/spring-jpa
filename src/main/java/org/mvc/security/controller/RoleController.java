@@ -7,7 +7,6 @@ import org.mvc.security.domain.Role;
 import org.mvc.security.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -72,17 +71,11 @@ public class RoleController {
 	}
 	
 	
-	
 	@RequestMapping(value = "/update-role.html", method = RequestMethod.POST)
 	public String updateRoleProcess(Role role) {
 		roleService.updateRole(role);
 		return  "redirect:/role/list-role.html";
 	}
 	
-	/*
-	 * @RequestMapping(value = "/edit-role.html", method = RequestMethod.POST)
-	 * public ModelAndView updateRole(@ModelAttribute("role") Role role) { mv = new
-	 * ModelAndView("add-role"); mv.addObject("role", role);
-	 * System.out.println("role:"+role.getRoleName()); return mv; }
-	 */
+
 }

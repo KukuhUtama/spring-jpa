@@ -11,7 +11,7 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "t_user")
-public class User {
+public class UserEntity {
 
 
 	@Id
@@ -33,13 +33,6 @@ public class User {
 	@Column(name = "is_active")
 	private boolean isActive;
 
-
-	/*
-	 * @ManyToMany(cascade = CascadeType.REMOVE, fetch =FetchType.EAGER)
-	 * 
-	 * @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
-	 * inverseJoinColumns = @JoinColumn(name = "role_id")) private List<Role> roles;
-	 */
 
 	public Long getId() {
 		return id;
