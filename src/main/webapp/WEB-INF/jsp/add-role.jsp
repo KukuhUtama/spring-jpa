@@ -24,7 +24,7 @@
                     <td><input id="roleName" name="roleName" value="${role.roleName}"></td>
                 </tr>  
                 <tr>
-                     <td colspan="2"><input type="submit" value="Update"></td>
+                     <td colspan="2"><input type="submit" value="Add"></td>
                 </tr>                    
             </table>
         </form:form>

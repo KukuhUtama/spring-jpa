@@ -47,8 +47,8 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public void deleteRoleById(Long id) {
-		roleRepository.deleteById(id);
+	public Integer deleteRoleById(Long id) {
+		return roleRepository.deleteRoleById(id);
 	}
 
 	@Override
@@ -63,5 +63,16 @@ public class RoleServiceImpl implements RoleService {
 		roleEntity = modelMapper.map(role, RoleEntity.class);
 		roleRepository.updateRole(roleEntity.getId(), roleEntity.getRoleName());
 	}
+
+	@Override
+	public List<Role> getListOfRoleByUserId(Long userId) {
+		listOfRoleEntity = (List<RoleEntity>) roleRepository.getListOfRoleByUserId(userId);
+		List<Role> listOfRole = listOfRoleEntity
+				  .stream()
+				  .map(RoleEntity -> modelMapper.map(RoleEntity, Role.class))
+				  .collect(Collectors.toList());
+		return listOfRole;
+	}
+	
 
 }

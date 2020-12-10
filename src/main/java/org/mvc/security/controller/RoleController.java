@@ -32,10 +32,10 @@ public class RoleController {
 	
 	
 	@RequestMapping(value = "/add-role.html", method = RequestMethod.POST)
-	public ModelAndView addRoleProcess(Role role) {
+	public String addRoleProcess(Role role) {
 		mv = new ModelAndView("add-role");
 		roleService.addRole(role);
-		return mv;
+		return  "redirect:/role/list-role.html";
 	}
 	
 	
@@ -54,7 +54,7 @@ public class RoleController {
 	        Long id = Long.valueOf(roleId.longValue());
 			roleService.deleteRoleById(id);	
 		}
-		return  "redirect:/role/role-list.html";
+		return  "redirect:/role/list-role.html";
 	}
 	
 	@RequestMapping(value = "/update-role.html", method = RequestMethod.GET)

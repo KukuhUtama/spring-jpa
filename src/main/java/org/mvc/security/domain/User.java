@@ -1,6 +1,7 @@
 package org.mvc.security.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class User implements Serializable{
 
@@ -12,7 +13,7 @@ public class User implements Serializable{
 	private String password;
 	private String passwordConfirm;
 	private boolean isActive;
-	
+	private List<Role> listOfRole;
 	
 	
 	public Long getId() {
@@ -48,6 +49,11 @@ public class User implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-
+	public List<Role> getListOfRole() {
+		return listOfRole;
+	}
+	public void setListRole(List<Role> listOfRole) {
+		this.listOfRole = listOfRole;
+	}
+    
 }

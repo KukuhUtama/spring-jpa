@@ -23,6 +23,21 @@
                     <td><input id="password" name="password" value="${user.password}"></td>
                 </tr> 
                 <tr>
+                    <td>Role: </td>
+                    <td>
+                    <c:forEach items="${listOfRole}" var="role">
+						<c:set var="currRoleId" value="${role.id}"></c:set>
+						<c:set var="isSelected" value="0"></c:set>
+						<c:forEach items="${listRoleSelected}" var="roleSelected">
+							<c:if test="${roleSelected == currRoleId}">
+								<c:set var="isSelected" value="1"></c:set>
+							</c:if>
+						</c:forEach>
+						<input type="checkbox" name="rolesSelected" value="${role.id}" ${isSelected == 1 ? 'checked' : ''}>${role.roleName}<br>
+					</c:forEach>
+                    </td>
+                </tr> 
+                <tr>
                     <td colspan="2"><input type="submit" value="Update"></td>
                 </tr>                    
             </table>

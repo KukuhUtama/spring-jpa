@@ -5,8 +5,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.mvc.security.domain.Role;
 import org.mvc.security.domain.User;
+import org.mvc.security.entity.RoleEntity;
 import org.mvc.security.entity.UserEntity;
+import org.mvc.security.repository.RoleRepository;
 import org.mvc.security.repository.UserRepository;
 import org.mvc.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +25,16 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private RoleRepository roleRepository;
 	
 	private Optional<UserEntity> userEntityOpt;
 	private UserEntity userEntity;
 	private User user;
 	private List<UserEntity> listOfUserEntity;
 	private List<User> listOfUser;
+	private List<RoleEntity> listOfRoleEntity;
+	private List<Role> listOfRole;
 	
 	@Override
 	public void addUser(User user) {
@@ -38,14 +45,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserById(Long id) {
 		userEntityOpt = userRepository.findById(id);
+		listOfRoleEntity = (List<RoleEntity>) roleRepository.findAll();
+		listOfRole = listOfRoleEntity.stream()
+				     .map(RoleEntity -> modelMapper.map(RoleEntity, Role.class))
+				     .collect(Collectors.toList());
 		user = modelMapper.map(userEntityOpt.get(), User.class);
+		user.setListRole(listOfRole);
 		return user;
 	}
 
 	@Override
 	public List<User> getListOfUser() {
 		listOfUserEntity = (List<UserEntity>) userRepository.findAll();
-		List<User> listOfUser = listOfUserEntity
+		listOfUser = listOfUserEntity
 				  .stream()
 				  .map(UserEntity -> modelMapper.map(UserEntity, User.class))
 				  .collect(Collectors.toList());
