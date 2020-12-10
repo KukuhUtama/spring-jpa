@@ -1,17 +1,17 @@
 package org.mvc.security.repository;
 
-import org.mvc.security.entity.User;
+import org.mvc.security.entity.UserEntity;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-/**
- * The Interface UserRepository.
- */
-public interface UserRepository {
+
+
+@Repository
+public interface UserRepository extends CrudRepository<UserEntity, Long> {
+	
+	 @Query("SELECT u FROM UserEntity u WHERE u.userName = :userName") 
+	 public UserEntity findByUserName(@Param("userName") String userName);
 	 
- 	/**
- 	 * Load user by username.
- 	 *
- 	 * @param username the username
- 	 * @return the user
- 	 */
- 	public User loadUserByUsername(String username);
 }
