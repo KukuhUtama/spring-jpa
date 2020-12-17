@@ -2,16 +2,16 @@ package org.mvc.security.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-public class UserRole implements Serializable{
-
-	private static final long serialVersionUID = 2916335077625850354L;
+public class Group implements Serializable{
+	private static final long serialVersionUID = -5124246572359614074L;
 	
 	private Long id;
-	private Long userId;
-	private Long roleId;
+	private String groupName;
 	private Date createdDate;
 	private Date modifiedDate;
+	private List<Department> listOfDepartement;
 	
 	public Long getId() {
 		return id;
@@ -19,17 +19,11 @@ public class UserRole implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getRoleId() {
-		return roleId;
+	public String getGroupName() {
+		return groupName;
 	}
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
-	}
-	public Long getUserId() {
-		return userId;
-	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
 	public Date getCreatedDate() {
 		return createdDate;
@@ -43,5 +37,10 @@ public class UserRole implements Serializable{
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	
+	public List<Department> getListOfDepartement() {
+		return listOfDepartement;
+	}
+	public void setListOfDepartement(List<Department> listOfDepartement) {
+		this.listOfDepartement = listOfDepartement;
+	}
 }

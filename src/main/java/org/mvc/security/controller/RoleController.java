@@ -1,6 +1,7 @@
 package org.mvc.security.controller;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.mvc.security.domain.Role;
@@ -18,9 +19,8 @@ public class RoleController {
 	@Autowired
 	private RoleService roleService;
 	  
-	  
 	private ModelAndView mv;
-	private Role role;
+	private Role role, currentRole;
 	private boolean isUpdate = false;
 	private List<Role> listOfRole;
 	
@@ -30,14 +30,13 @@ public class RoleController {
 		return mv;
 	}
 	
-	
 	@RequestMapping(value = "/add-role.html", method = RequestMethod.POST)
 	public String addRoleProcess(Role role) {
 		mv = new ModelAndView("add-role");
+		role.setCreatedDate(new Date());
 		roleService.addRole(role);
 		return  "redirect:/role/list-role.html";
 	}
-	
 	
 	@RequestMapping(value = "/list-role.html", method = RequestMethod.GET)
 	public ModelAndView getAllRole() {
@@ -46,7 +45,6 @@ public class RoleController {
 		mv.addObject("listOfRole", listOfRole);
 		return mv;
 	}
-	
 	
 	@RequestMapping(value = "/delete-role-by-id.html", method = RequestMethod.GET)
 	public String deleteRoleById(Integer roleId) {
@@ -70,12 +68,13 @@ public class RoleController {
 		return mv;
 	}
 	
-	
 	@RequestMapping(value = "/update-role.html", method = RequestMethod.POST)
 	public String updateRoleProcess(Role role) {
-		roleService.updateRole(role);
+		currentRole = roleService.getRoleById(role.getId());
+		currentRole.setRoleName(role.getRoleName());
+		currentRole.setModifiedDate(new Date());
+		roleService.updateRole(currentRole);
 		return  "redirect:/role/list-role.html";
 	}
 	
-
 }

@@ -5,21 +5,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "t_user_role")
-public class UserRoleEntity {
+public class UserRoleEntity extends CommonBase{
 
 	@Id
 	@Column(name = "user_role_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "role_id")
-	private Long roleId;
-	@Column(name = "user_id")
-	private Long userId;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private UserEntity user;
+	
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	private RoleEntity role;
 
 	public Long getId() {
 		return id;
@@ -29,19 +34,19 @@ public class UserRoleEntity {
 		this.id = id;
 	}
 
-	public Long getRoleId() {
-		return roleId;
+	public UserEntity getUser() {
+		return user;
 	}
 
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+	public void setUser(UserEntity user) {
+		this.user = user;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public RoleEntity getRole() {
+		return role;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setRole(RoleEntity role) {
+		this.role = role;
 	}
 }

@@ -1,6 +1,7 @@
 package org.mvc.security.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class User implements Serializable{
@@ -14,7 +15,8 @@ public class User implements Serializable{
 	private String passwordConfirm;
 	private boolean isActive;
 	private List<Role> listOfRole;
-	
+	private Date createdDate;
+	private Date modifiedDate;
 	
 	public Long getId() {
 		return id;
@@ -55,5 +57,19 @@ public class User implements Serializable{
 	public void setListRole(List<Role> listOfRole) {
 		this.listOfRole = listOfRole;
 	}
-    
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+	public void setListOfRole(List<Role> listOfRole) {
+		this.listOfRole = listOfRole;
+	}
 }

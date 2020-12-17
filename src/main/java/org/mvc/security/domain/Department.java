@@ -3,15 +3,15 @@ package org.mvc.security.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserRole implements Serializable{
+public class Department implements Serializable{
 
-	private static final long serialVersionUID = 2916335077625850354L;
+	private static final long serialVersionUID = -8358932278083859681L;
 	
 	private Long id;
-	private Long userId;
-	private Long roleId;
+	private String departmentName;
 	private Date createdDate;
 	private Date modifiedDate;
+	private Long idGroup;
 	
 	public Long getId() {
 		return id;
@@ -19,17 +19,17 @@ public class UserRole implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getRoleId() {
-		return roleId;
+	public String getDepartmentName() {
+		return departmentName;
 	}
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
-	public Long getUserId() {
-		return userId;
+	public Long getIdGroup() {
+		return idGroup;
 	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setIdGroup(Long idGroup) {
+		this.idGroup = idGroup;
 	}
 	public Date getCreatedDate() {
 		return createdDate;
@@ -43,5 +43,4 @@ public class UserRole implements Serializable{
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	
 }

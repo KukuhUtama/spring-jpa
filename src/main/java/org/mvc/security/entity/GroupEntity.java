@@ -8,18 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-
-@Table(name = "t_role")
-public class RoleEntity extends CommonBase{
-
+@Table(name="t_group")
+public class GroupEntity extends CommonBase{
+	
 	@Id
-	@Column(name = "role_id")
+	@Column(name="group_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(name = "role_name")
-	private String roleName;
-
+	
+	@Column(name="group_name")
+	private String groupName;
 
 	public Long getId() {
 		return id;
@@ -29,13 +27,11 @@ public class RoleEntity extends CommonBase{
 		this.id = id;
 	}
 
-	public String getRoleName() {
-		return roleName;
+	public String getGroupName() {
+		return groupName;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
-   
- }
- 
+}

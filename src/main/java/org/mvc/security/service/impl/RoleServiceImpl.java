@@ -61,7 +61,7 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public void updateRole(Role role) {
 		roleEntity = modelMapper.map(role, RoleEntity.class);
-		roleRepository.updateRole(roleEntity.getId(), roleEntity.getRoleName());
+		roleRepository.save(roleEntity);
 	}
 
 	@Override

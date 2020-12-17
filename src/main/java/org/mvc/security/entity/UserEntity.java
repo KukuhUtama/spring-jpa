@@ -11,14 +11,13 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name = "t_user")
-public class UserEntity {
+public class UserEntity extends CommonBase{
 
 
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-
 
 	@Column(name = "user_name")
 	private String userName;

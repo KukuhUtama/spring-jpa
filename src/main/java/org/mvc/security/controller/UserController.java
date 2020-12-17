@@ -1,11 +1,11 @@
 package org.mvc.security.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.mvc.security.domain.Role;
 import org.mvc.security.domain.User;
-import org.mvc.security.domain.UserRole;
 import org.mvc.security.service.RoleService;
 import org.mvc.security.service.UserRoleService;
 import org.mvc.security.service.UserService;
@@ -28,13 +28,12 @@ public class UserController {
 	private UserRoleService userRoleService;
 	  
 	private ModelAndView mv;
-	private User user;
-	private UserRole userRole;
+	private User user, currentUser;
 	private List<Integer> listRoleSelected;
+	private List<Long> listOfRoleId;
 	private List<User> listOfUser;
 	private List<Role> listOfRole;
-	private List<UserRole> listOfUserRole;
-	
+
 	@RequestMapping(value = "/add-user.html", method = RequestMethod.GET)
 	public ModelAndView addUser() {
 		mv = new ModelAndView("add-user");
@@ -46,6 +45,7 @@ public class UserController {
 	@RequestMapping(value = "/add-user.html", method = RequestMethod.POST)
 	public String addUserProcess(User user) {
 		mv = new ModelAndView("add-user");
+		user.setCreatedDate(new Date());
 		userService.addUser(user);
 		return  "redirect:/user/list-user.html";
 	}
@@ -59,7 +59,6 @@ public class UserController {
 		return mv;
 	}
 	
-	
 	@RequestMapping(value = "/delete-user-by-id.html", method = RequestMethod.GET)
 	public String deleteUserById(Integer userId) {
 		if(userId != null) {
@@ -69,7 +68,6 @@ public class UserController {
 		}
 		return  "redirect:/user/list-user.html";
 	}
-	
 	
 	@RequestMapping(value = "/update-user.html", method = RequestMethod.GET)
 	public ModelAndView updateUser(Integer userId) {
@@ -96,22 +94,22 @@ public class UserController {
 	public String updateUserProcess(User user, @RequestParam(required = true)String rolesSelected) {
 		mv = new ModelAndView("add-user");
 		String [] arrRole = rolesSelected.split(",");
-		
 		if(arrRole != null && arrRole.length > 0){
-			listOfUserRole = new ArrayList<UserRole>();
+			listOfRoleId = new ArrayList<Long>();
 			for(int i=0; i<arrRole.length; i++){
-				userRole = new UserRole();
-				userRole.setUserId(user.getId());
-				userRole.setRoleId(Long.valueOf(arrRole[i]));
-				listOfUserRole.add(userRole);
-				userRole = null;
+				listOfRoleId.add(Long.valueOf(arrRole[i]));
 			}
-			userRoleService.deleteUserRoleByUserId(user.getId());
-			userRoleService.addListUserRole(listOfUserRole);
+			userRoleService.deleteUserRoleByUserIdAndRoleId(user.getId(), listOfRoleId);
+			userRoleService.addListUserRole(user.getId(), listOfRoleId);
 		}
-		userService.addUser(user);
+		currentUser = userService.getUserById(user.getId());
+		currentUser.setPassword(user.getPassword());
+		currentUser.setPasswordConfirm(user.getPasswordConfirm());
+		currentUser.setUserName(user.getUserName()); 
+		currentUser.setModifiedDate(new Date());
+		userService.addUser(currentUser);
 		return  "redirect:/user/update-user.html?userId="+user.getId();
 	}
 	
-	
+
 }
