@@ -41,15 +41,9 @@ public class DepartmentServiceImpl implements DepartmentService{
 	
 	@Override
 	public Department addDepartment(Department department) {
-		groupEntityOpt = groupRepository.findById(department.getIdGroup());
-		if(groupEntityOpt.isPresent()){
-			departmentEntity = modelMapper.map(department, DepartmentEntity.class);
-			departmentEntity.setGroup(groupEntityOpt.get());
-			departmentEntity = departmentRepository.save(departmentEntity);
-		}
-        department = modelMapper.map(departmentEntity, Department.class);
-        department.setIdGroup(departmentEntity.getGroup().getId());
-		
+		departmentEntity = modelMapper.map(department, DepartmentEntity.class);
+		departmentEntity = departmentRepository.save(departmentEntity);
+		department = modelMapper.map(departmentEntity, Department.class);
 		return department;
 	}
 
@@ -58,20 +52,33 @@ public class DepartmentServiceImpl implements DepartmentService{
 		departmentEntityOpt = departmentRepository.findById(id);
 		if(departmentEntityOpt.isPresent()){
 		   department = modelMapper.map(departmentEntityOpt.get(), Department.class);
-		   department.setIdGroup(departmentEntityOpt.get().getGroup().getId());
 		}
-     
 		return department;
 	}
 
 	@Override
 	public List<Department> getListOfDepartmentByGroupId(Long groupId) {
 		listOfDepartmentEntity = (List<DepartmentEntity>) departmentRepository.getListOfDepartmentByGroupId(groupId);
-		List<Department> listOfDepartment = listOfDepartmentEntity
+		listOfDepartment = listOfDepartmentEntity
 				  .stream()
 				  .map(DepartmentEntity -> modelMapper.map(DepartmentEntity, Department.class))
 				  .collect(Collectors.toList());
 		return listOfDepartment;
+	}
+
+	@Override
+	public List<Department> getListOfDepartment() {
+		listOfDepartmentEntity = (List<DepartmentEntity>) departmentRepository.findAll();
+		listOfDepartment = listOfDepartmentEntity
+				  .stream()
+				  .map(DepartmentEntity -> modelMapper.map(DepartmentEntity, Department.class))
+				  .collect(Collectors.toList());
+		return listOfDepartment;
+	}
+
+	@Override
+	public Integer deleteDepartmentById(Long id) {
+		return departmentRepository.deleteDepartmentById(id);
 	}
 
 }

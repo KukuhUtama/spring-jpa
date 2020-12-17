@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/group")
+@RequestMapping(value="/group")
 public class GroupController {
 	
 	@Autowired
@@ -38,7 +38,7 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value = "/list-group.html", method = RequestMethod.GET)
-	public ModelAndView getAllRole() {
+	public ModelAndView getAllGroup() {
 		mv = new ModelAndView("list-group");
 		listOfGroup = groupService.getListOfGroup();
 		mv.addObject("listOfGroup", listOfGroup);
@@ -71,7 +71,7 @@ public class GroupController {
 	public String deleteGroupById(Integer groupId) {
 		if(groupId != null) {
 	        Long id = Long.valueOf(groupId.longValue());
-			groupService.deleteGropuById(id);	
+			groupService.deleteGroupById(id);	
 		}
 		return  "redirect:/group/list-group.html";
 	}

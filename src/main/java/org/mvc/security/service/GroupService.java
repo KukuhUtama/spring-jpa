@@ -8,5 +8,5 @@ public interface GroupService {
      public Group addGroup(Group group);
      public Group getGroupById(Long id);
      public List<Group> getListOfGroup();
-     public Integer deleteGropuById(Long id);
+     public Integer deleteGroupById(Long id);
 }

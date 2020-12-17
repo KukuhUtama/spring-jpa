@@ -82,7 +82,7 @@ public class GroupServiceImpl implements GroupService{
 	}
 
 	@Override
-	public Integer deleteGropuById(Long id) {
+	public Integer deleteGroupById(Long id) {
 		return groupRepository.deleteGroupById(id);
 	}
 

@@ -8,4 +8,6 @@ public interface DepartmentService {
     public Department addDepartment(Department department);
     public Department getDepartmentById(Long id);
     public List<Department> getListOfDepartmentByGroupId(Long groupId);
+    public List<Department> getListOfDepartment();
+    public Integer deleteDepartmentById(Long id);
 }
