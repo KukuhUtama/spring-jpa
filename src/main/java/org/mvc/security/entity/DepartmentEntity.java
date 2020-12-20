@@ -13,6 +13,8 @@ import javax.persistence.Table;
 @Table(name="t_department")
 public class DepartmentEntity extends CommonBase{
     
+	private static final long serialVersionUID = 7452199272372812681L;
+
 	@Id
 	@Column(name="department_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

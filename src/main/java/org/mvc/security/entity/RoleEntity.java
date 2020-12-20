@@ -12,6 +12,8 @@ import javax.persistence.Table;
 @Table(name = "t_role")
 public class RoleEntity extends CommonBase{
 
+	private static final long serialVersionUID = -2010680469714627895L;
+
 	@Id
 	@Column(name = "role_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

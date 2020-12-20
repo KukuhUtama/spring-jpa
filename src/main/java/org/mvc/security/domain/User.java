@@ -1,19 +1,15 @@
 package org.mvc.security.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class User implements Serializable{
-
-	private static final long serialVersionUID = 8189847046112267673L;
+public class User {
 	
-
 	private Long id;
 	private String userName;
 	private String password;
 	private String passwordConfirm;
-	private boolean isActive;
+	private Boolean isActive;
 	private List<Role> listOfRole;
 	private Date createdDate;
 	private Date modifiedDate;
@@ -42,14 +38,11 @@ public class User implements Serializable{
 	public void setPasswordConfirm(String passwordConfirm) {
 		this.passwordConfirm = passwordConfirm;
 	}
-	public boolean isActive() {
+	public Boolean getIsActive() {
 		return isActive;
 	}
-	public void setActive(boolean isActive) {
+	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 	public List<Role> getListOfRole() {
 		return listOfRole;

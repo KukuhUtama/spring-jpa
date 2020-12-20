@@ -20,7 +20,7 @@
                 </tr>  
                 <tr>
                     <td>Password: </td>
-                    <td><input id="password" name="password" value="${user.password}"></td>
+                    <td><input type="password" "password" name="password" value=""></td>
                 </tr> 
                 <tr>
                     <td>Role: </td>
@@ -37,6 +37,11 @@
 					</c:forEach>
                     </td>
                 </tr> 
+                
+                 <tr>
+                     <td><label for="vehicle1">Is Active</label></td>
+                     <td><input type="checkbox" id="isActive" name="isActive" value="true" ${user.isActive eq true ? 'checked' : ''}>  </td>
+                </tr>
                 <tr>
                     <td colspan="2"><input type="submit" value="Update"></td>
                 </tr>                    

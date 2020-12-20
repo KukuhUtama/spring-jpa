@@ -1,12 +1,13 @@
 package org.mvc.security.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class CommonBase {
+public class CommonBase implements Serializable{
 
 	@Column(name = "created_date")
 	private Date createdDate;

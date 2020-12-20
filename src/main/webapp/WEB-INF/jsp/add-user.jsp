@@ -29,6 +29,10 @@
                     <td><input type="password" id="passwordConfirm" name="passwordConfirm" value="${user.passwordConfirm}"></td>
                 </tr>  
                 <tr>
+                     <td>Is Active</td>
+                     <td><input type="checkbox" id="isActive" name="isActive" value="true"> </td>
+                </tr>
+                <tr>
                      <td colspan="2"><input type="submit" value="save"></td>
                 </tr>                    
             </table>

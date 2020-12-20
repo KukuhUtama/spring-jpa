@@ -11,6 +11,8 @@ import javax.persistence.Table;
 @Table(name="t_group")
 public class GroupEntity extends CommonBase{
 	
+	private static final long serialVersionUID = -6192785513856847409L;
+
 	@Id
 	@Column(name="group_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

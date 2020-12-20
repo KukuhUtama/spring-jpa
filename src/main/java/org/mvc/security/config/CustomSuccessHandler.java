@@ -31,7 +31,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 		redirectStrategy.sendRedirect(request, response, targetUrl);
 	}
 
-	protected String determineTargetUrl(Authentication authentication) {
+	protected String determineTargetUrl(Authentication authentication) {System.out.println("-----------------determineTargetUrl-----------------");
 		String url = "";
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		List<String> roles = new ArrayList<String>();
@@ -41,11 +41,11 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 		}
 
 		if (isAdmin(roles)) {
-			url = "/admin";
+			url = "/";
 		} else if (isUser(roles)) {
-			url = "/user";
+			url = "/";
 		} else {
-			url = "/access-denied";
+			url = "/";
 		}
 		return url;
 	}

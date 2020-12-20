@@ -9,8 +9,10 @@ import org.mvc.security.domain.User;
 import org.mvc.security.service.RoleService;
 import org.mvc.security.service.UserRoleService;
 import org.mvc.security.service.UserService;
+import org.mvc.security.util.Utililty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,9 +45,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/add-user.html", method = RequestMethod.POST)
-	public String addUserProcess(User user) {
+	public String addUserProcess(@ModelAttribute("user")User user) {
 		mv = new ModelAndView("add-user");
 		user.setCreatedDate(new Date());
+		user.setPassword(Utililty.passwordEncoder().encode(user.getPassword()));
+		user.setIsActive(user.getIsActive() == null ? false : true);
 		userService.addUser(user);
 		return  "redirect:/user/list-user.html";
 	}
@@ -91,22 +95,25 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/update-user.html", method = RequestMethod.POST)
-	public String updateUserProcess(User user, @RequestParam(required = true)String rolesSelected) {
+	public String updateUserProcess(@ModelAttribute("user")User user, @RequestParam(required = false)String rolesSelected) {
 		mv = new ModelAndView("add-user");
-		String [] arrRole = rolesSelected.split(",");
-		if(arrRole != null && arrRole.length > 0){
-			listOfRoleId = new ArrayList<Long>();
-			for(int i=0; i<arrRole.length; i++){
-				listOfRoleId.add(Long.valueOf(arrRole[i]));
+		if(rolesSelected != null && !"".equals(rolesSelected)){
+			String [] arrRole = rolesSelected.split(",");
+			if(arrRole != null && arrRole.length > 0){
+				listOfRoleId = new ArrayList<Long>();
+				for(int i=0; i<arrRole.length; i++){
+					listOfRoleId.add(Long.valueOf(arrRole[i]));
+				}
+				userRoleService.deleteUserRoleByUserIdAndRoleId(user.getId(), listOfRoleId);
+				userRoleService.addListUserRole(user.getId(), listOfRoleId);
 			}
-			userRoleService.deleteUserRoleByUserIdAndRoleId(user.getId(), listOfRoleId);
-			userRoleService.addListUserRole(user.getId(), listOfRoleId);
 		}
 		currentUser = userService.getUserById(user.getId());
-		currentUser.setPassword(user.getPassword());
+		currentUser.setPassword(Utililty.passwordEncoder().encode(user.getPassword()));
 		currentUser.setPasswordConfirm(user.getPasswordConfirm());
 		currentUser.setUserName(user.getUserName()); 
 		currentUser.setModifiedDate(new Date());
+		currentUser.setIsActive(user.getIsActive() == null ? false : true);
 		userService.addUser(currentUser);
 		return  "redirect:/user/update-user.html?userId="+user.getId();
 	}

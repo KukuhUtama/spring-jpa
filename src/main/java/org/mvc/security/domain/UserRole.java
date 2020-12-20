@@ -1,11 +1,8 @@
 package org.mvc.security.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class UserRole implements Serializable{
-
-	private static final long serialVersionUID = 2916335077625850354L;
+public class UserRole {
 	
 	private Long id;
 	private Long userId;

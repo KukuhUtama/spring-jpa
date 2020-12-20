@@ -2,10 +2,11 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="container">
-<form class="form-horizontal"  method="post" action="login" >
+ <c:set var="root" value="${pageContext.request.contextPath}"/>
+<form class="form-horizontal"  method="post" action="${root}/perform-login.html" >
         <h2>Login Form</h2>
          <div class="form-group">
-            <label class="control-label col-sm-2" for="username">Username</label>
+            <label class="control-label col-sm-2" for="username">Usernamed</label>
             <div class="control-label col-sm-8">
                   <input type="text" class="form-control" id="username" name="username" placeholder="Type Username"/>
             </div>

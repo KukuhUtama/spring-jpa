@@ -1,12 +1,9 @@
 package org.mvc.security.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Department implements Serializable{
+public class Department{
 
-	private static final long serialVersionUID = -8358932278083859681L;
-	
 	private Long id;
 	private String departmentName;
 	private Date createdDate;

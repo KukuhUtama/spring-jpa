@@ -13,6 +13,7 @@ import javax.persistence.Transient;
 @Table(name = "t_user")
 public class UserEntity extends CommonBase{
 
+	private static final long serialVersionUID = 8780078648143904832L;
 
 	@Id
 	@Column(name = "user_id")
@@ -30,7 +31,7 @@ public class UserEntity extends CommonBase{
 	private String passwordConfirm;
 	
 	@Column(name = "is_active")
-	private boolean isActive;
+	private Boolean isActive;
 
 
 	public Long getId() {
@@ -66,13 +67,12 @@ public class UserEntity extends CommonBase{
 		this.passwordConfirm = passwordConfirm;
 	}
 
-	public boolean isActive() {
+	public Boolean getIsActive() {
 		return isActive;
 	}
 
-	public void setActive(boolean isActive) {
+	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-
 }
 

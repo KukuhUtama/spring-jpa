@@ -1,11 +1,9 @@
 package org.mvc.security.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Group implements Serializable{
-	private static final long serialVersionUID = -5124246572359614074L;
+public class Group {
 	
 	private Long id;
 	private String groupName;

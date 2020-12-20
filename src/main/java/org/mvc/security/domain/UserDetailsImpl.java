@@ -9,21 +9,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailsImpl implements UserDetails{
 
-	private static final long serialVersionUID = 1400583340855414412L;
+	private static final long serialVersionUID = 5331493162612543587L;
+	
 	private String userName;
 	private String password;
 	private boolean isActive;
 	private List<GrantedAuthority> authorities;
 	
-
 	public UserDetailsImpl(User user) {
 		this.userName = user.getUserName();
 		this.password = user.getPassword();
-		this.isActive = user.isActive();
+		this.isActive = user.getIsActive().booleanValue();
 		this.authorities = new ArrayList<GrantedAuthority>();
 	}
 	
-
 	public UserDetailsImpl() {}
 
 	@Override
