@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         	for(String url : entry.getValue())
             interceptUrlRegistry.antMatchers(url).hasAuthority(entry.getKey());
         }
+        //https://stackoverflow.com/questions/6893061/how-to-dynamically-decide-intercept-url-access-attribute-value-in-spring-secur
         interceptUrlRegistry
         .and()
         .formLogin().loginPage("/login.html").loginProcessingUrl("/perform-login.html")
@@ -81,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     
     @Bean
-    public CustomProvider customeAuthenticationProvider(){System.out.println("provider");
+    public CustomProvider customeAuthenticationProvider(){
         CustomProvider authProvider = new CustomProvider();
     	authProvider.setUserDetailsService(userDetailsService);
     	authProvider.setPasswordEncoder(passwordEncoder());
