@@ -16,7 +16,6 @@ public interface UserRoleRepository extends CrudRepository<UserRoleEntity, Long>
 	 @Query("DELETE FROM UserRoleEntity u WHERE u.user.id = :userId") 
 	 public void deleteUserRoleByUserId(@Param("userId") Long userId);
 	 
-	 
 	 @Transactional
 	 @Modifying(clearAutomatically = true)
 	 @Query("DELETE FROM UserRoleEntity u WHERE u.user.id = :userId AND u.role.id NOT IN :ids") 

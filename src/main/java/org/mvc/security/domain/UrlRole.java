@@ -1,54 +1,45 @@
 package org.mvc.security.domain;
 
 import java.util.Date;
-import java.util.List;
 
-public class Role {
-	
+public class UrlRole {
 	private Long id;
-	private String roleName;
+	private Long urlId;
+	private Long roleId;
 	private Date createdDate;
 	private Date modifiedDate;
-	private List<Url> listOfUrl;
 	
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getRoleName() {
-		return roleName;
+	public Long getUrlId() {
+		return urlId;
 	}
-
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setUrlId(Long urlId) {
+		this.urlId = urlId;
 	}
-
+	public Long getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
 	public Date getCreatedDate() {
 		return createdDate;
 	}
-
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-
 	public Date getModifiedDate() {
 		return modifiedDate;
 	}
-
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-
-	public List<Url> getListOfUrl() {
-		return listOfUrl;
-	}
-
-	public void setListOfUrl(List<Url> listOfUrl) {
-		this.listOfUrl = listOfUrl;
-	}
-
+	
+	
+	
 }

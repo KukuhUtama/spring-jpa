@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class CustomProvider extends DaoAuthenticationProvider{
 	
  	protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication){
- 		System.out.println("------CustomProvider-----------");
  		checkPassword(userDetails, authentication);
  	}
  	

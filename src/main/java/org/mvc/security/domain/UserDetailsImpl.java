@@ -1,6 +1,5 @@
 package org.mvc.security.domain;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,11 +15,11 @@ public class UserDetailsImpl implements UserDetails{
 	private boolean isActive;
 	private List<GrantedAuthority> authorities;
 	
-	public UserDetailsImpl(User user) {
+	public UserDetailsImpl(User user, List<GrantedAuthority> authorities) {
 		this.userName = user.getUserName();
 		this.password = user.getPassword();
 		this.isActive = user.getIsActive().booleanValue();
-		this.authorities = new ArrayList<GrantedAuthority>();
+		this.authorities = authorities;
 	}
 	
 	public UserDetailsImpl() {}

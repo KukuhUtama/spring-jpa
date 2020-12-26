@@ -19,6 +19,21 @@
                     <td><input id="roleName" name="roleName" value="${role.roleName}"></td>
                 </tr>  
                 <tr>
+                  <td>Url Address: </td>
+                  <td>
+                  <c:forEach items="${listOfUrl}" var="url">
+						<c:set var="currUrlId" value="${url.id}"></c:set>
+						<c:set var="isSelected" value="0"></c:set>
+						<c:forEach items="${listUrlSelected}" var="urlSelected">
+							<c:if test="${urlSelected == currUrlId}">
+								<c:set var="isSelected" value="1"></c:set>
+							</c:if>
+						</c:forEach>
+						<input type="checkbox" name="urlsSelected" value="${url.id}" ${isSelected == 1 ? 'checked' : ''}>${url.urlAddress}<br>
+					</c:forEach>
+					</td>
+				</tr>
+                <tr>
                     <td colspan="2"><input type="submit" value="Update"></td>
                 </tr>                    
             </table>

@@ -1,6 +1,9 @@
 package org.mvc.security.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -28,13 +31,17 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	private String key, value;
 	private Optional<UserEntity> userEntityOpt;
 	private UserEntity userEntity;
 	private User user;
+	private List<Object[]> ListOfRoleAndUrlAdress;
+	private List<String> listOfUrl;
 	private List<UserEntity> listOfUserEntity;
 	private List<User> listOfUser;
 	private List<RoleEntity> listOfRoleEntity;
 	private List<Role> listOfRole;
+	private Map<String, List<String>> mapOfRoleUrlAddress;
 	
 	@Override
 	public void addUser(User user) {
@@ -67,6 +74,39 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteUserById(Long id) {
          userRepository.deleteById(id);	
+	}
+
+	@Override
+	public Map<String, List<String>> getRoleAndUrlAddressMap() {
+		mapOfRoleUrlAddress = new HashMap<String, List<String>>();
+		ListOfRoleAndUrlAdress = userRepository.getRoleAndUrlAddressMap();
+	    for(Object[] el : ListOfRoleAndUrlAdress){
+	    	key = (String) el[0];
+	    	value = (String) el[1];
+	    	listOfUrl = mapOfRoleUrlAddress.get(key);
+	    	if(listOfUrl == null){
+	    		listOfUrl = new ArrayList<String>();
+	    	}
+	    	listOfUrl.add(value);
+	    	mapOfRoleUrlAddress.put(key, listOfUrl);
+	    }
+		return mapOfRoleUrlAddress;
+	}
+
+	@Override
+	public User findByUserName(String username) {
+		userEntity = userRepository.findByUserName(username);
+		if(userEntity != null && userEntity.getId() != null){
+			user = modelMapper.map(userEntity, User.class);
+			
+			listOfRoleEntity = (List<RoleEntity>) roleRepository.getListOfRoleByUserId(user.getId());
+			listOfRole = listOfRoleEntity.stream()
+				     .map(RoleEntity -> modelMapper.map(RoleEntity, Role.class))
+				     .collect(Collectors.toList());
+			
+			user.setListOfRole(listOfRole);
+		}
+		return user;
 	}
 
 }

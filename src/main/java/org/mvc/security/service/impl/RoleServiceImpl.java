@@ -31,15 +31,17 @@ public class RoleServiceImpl implements RoleService {
 	private List<Role> listOfRole;
 	
 	@Override
-	public void addRole(Role role) {
+	public Role addRole(Role role) {
 		roleEntity = modelMapper.map(role, RoleEntity.class);
-		roleRepository.save(roleEntity);
+		roleEntity = roleRepository.save(roleEntity);
+		role = modelMapper.map(roleEntity, Role.class);
+		return role;
 	}
 
 	@Override
 	public List<Role> getListOfRole() {
 		listOfRoleEntity = (List<RoleEntity>) roleRepository.findAll();
-		List<Role> listOfRole = listOfRoleEntity
+		listOfRole = listOfRoleEntity
 				  .stream()
 				  .map(RoleEntity -> modelMapper.map(RoleEntity, Role.class))
 				  .collect(Collectors.toList());
@@ -67,7 +69,7 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public List<Role> getListOfRoleByUserId(Long userId) {
 		listOfRoleEntity = (List<RoleEntity>) roleRepository.getListOfRoleByUserId(userId);
-		List<Role> listOfRole = listOfRoleEntity
+	    listOfRole = listOfRoleEntity
 				  .stream()
 				  .map(RoleEntity -> modelMapper.map(RoleEntity, Role.class))
 				  .collect(Collectors.toList());

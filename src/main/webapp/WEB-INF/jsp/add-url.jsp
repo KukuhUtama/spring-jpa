@@ -7,29 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <c:if test = "${isUpdate eq true}">
-<title>Update Role</title>
+<title>Update Url</title>
 </c:if>
 <c:if test = "${isUpdate eq false}">
-<title>Add Role</title>
+<title>Add Url</title>
 </c:if>
 </head>
 <body>
     <c:set var="root" value="${pageContext.request.contextPath}"/>
     <div align="center">
-        <h2>Add New Role</h2>
-        <form:form action="${root}/role/add-role.html"  modelAttribute="role" method="post">
+        <h2>Add New Url</h2>
+        <form:form action="${root}/url/add-url.html"  modelAttribute="url" method="post">
             <table border="0" cellpadding="1">
                 <tr>
-                    <td>Role Name: </td>
-                    <td><input id="roleName" name="roleName" value="${role.roleName}"></td>
-                </tr> 
-                <tr>
-                    <td>Url: </td>
-                    <td>
-                    <c:forEach items="${listOfUrl}" var="url">
-						<input type="checkbox" name="urlsSelected" value="${url.id}">${url.urlAddress}<br>
-					</c:forEach>
-                    </td>
+                    <td>Url Address: </td>
+                    <td><input id="urlAddress" name="urlAddress" value="${url.urlAddress}"></td>
                 </tr>  
                 <tr>
                      <td colspan="2"><input type="submit" value="Add"></td>
